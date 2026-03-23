@@ -10,6 +10,7 @@
             public string Description { get; set; }
             public int Quantity { get; set; }
             public double Discount { get; set; }
+            public CustomOrderColor Color {  get; set; }
             public double Final_Price()
             {
                 return Price - (Price - Discount / 100);
@@ -46,6 +47,17 @@
                 Strings,
                 Accessories
             }
+        public enum CustomOrderColor
+        {
+            Blue,
+            Red,
+            Green,
+            Black,
+            Purple,
+            White,
+            Orange
+        }
+        
         public string Info()
         {
             string info = $"ID:{ID} Name:{Name} Brand:{Brand} Price:{Price} Quantity:{Quantity}";
