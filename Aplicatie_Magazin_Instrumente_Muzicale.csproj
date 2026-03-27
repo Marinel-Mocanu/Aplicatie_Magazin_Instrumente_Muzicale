@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdministrareDate\AdministrareDate.csproj" />
+    <ProjectReference Include="..\ClientManager\ClientManager.csproj" />
+  </ItemGroup>
+
 </Project>
