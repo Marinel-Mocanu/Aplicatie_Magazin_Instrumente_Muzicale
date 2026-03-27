@@ -35,27 +35,29 @@
                 Discount = DiscountIn;
                 Quantity=QuantityIn;
             }
+        [Flags]
             public enum Instrument_Category
             {
-                Guitars,
-                Drums,
-                Keyboards,
-                Mics,
-                Amps,
-                Synths,
-                Cables,
-                Strings,
-                Accessories
+                Guitars = 1,
+                Drums = 2,
+                Keyboards= 4,
+                Mics = 8,
+                Amps = 16,
+                Synths = 32,
+                Cables = 64,
+                Strings = 128,
+                Accessories= 256
             }
+        [Flags]
         public enum CustomOrderColor
         {
-            Blue,
-            Red,
-            Green,
-            Black,
-            Purple,
-            White,
-            Orange
+            Blue = 1,
+            Red = 2,
+            Green = 4,
+            Black = 8,
+            Purple = 16,
+            White  = 32,
+            Orange = 64
         }
         
         public string Info()

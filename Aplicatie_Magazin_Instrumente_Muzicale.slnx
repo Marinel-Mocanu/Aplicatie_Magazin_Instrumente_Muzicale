@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="../AdministrareDate/AdministrareDate.csproj" Id="79bc5287-b720-4e4c-9049-084eadb827c1" />
   <Project Path="../ClientManager/ClientManager.csproj" Id="36baf218-b447-42c0-a03f-b8db0f862864" />
   <Project Path="Aplicatie_Magazin_Instrumente_Muzicale.csproj" />
 </Solution>
