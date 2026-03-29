@@ -10,6 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="..\AdministrareDate\AdministrareDate.csproj" />
     <ProjectReference Include="..\ClientManager\ClientManager.csproj" />
+    <ProjectReference Include="AdministrareDateText\AdministrareDateText.csproj" />
+    <ProjectReference Include="StocareFactory\StocareFactory.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using Aplicatie_Magazin_Instrumente_Muzicale;
+﻿using AdministrareDate;
+using Aplicatie_Magazin_Instrumente_Muzicale;
 namespace Magazin
 {
     class Program
@@ -8,7 +9,9 @@ namespace Magazin
             List<Instrument> instruments = new List<Instrument>();
             Instrument? instrumentNou = null;
             List<Client> clients = new List<Client>();
+            IStocareDate adminClienti = StocareFactory.GetAdministratorStocare();
             Client? clientNou = null;
+
             string optiune;
 
             do
@@ -49,7 +52,8 @@ namespace Magazin
                         AfisareInstrumente(instruments);
                         break;
                     case "A1":
-                        AfisareClienti(clients);
+                        var clienti = adminClienti.GetClienti();
+                        AfisareClienti(clienti);
                         break;
                     case "S":
                         instrumentNou.ID = instruments.Count + 1;
@@ -58,7 +62,12 @@ namespace Magazin
                         break;
                     case "S1":
                         clientNou.ID = clients.Count + 1;
-                        clients.Add(clientNou);
+                        if (clientNou != null)
+                        {
+                            adminClienti.AdaugaClient(clientNou);
+                            Console.WriteLine("Client salvat in fisier");
+                        }
+
                         Console.WriteLine("Client salvat");
                         break;
                     case "P":
@@ -66,8 +75,9 @@ namespace Magazin
                         string nume = Console.ReadLine();
                         Console.WriteLine("Introduceti email-ul:");
                         string email = Console.ReadLine();
+                        var listaClienti = adminClienti.GetClienti();
                         string parolaGasita = GetPassword(clients, email, nume);
-                        if(parolaGasita != null)
+                        if (parolaGasita != null)
                         {
                             Console.WriteLine($"Parola: {parolaGasita}");
                         }
@@ -92,9 +102,9 @@ namespace Magazin
         public static Instrument CitireInstrumentTastatura()
         {
             Console.WriteLine("Introduceti numele:");
-            string nume=Console.ReadLine();
+            string nume = Console.ReadLine();
             Console.WriteLine("Introduceti brandul:");
-            string brand=Console.ReadLine();
+            string brand = Console.ReadLine();
             Console.WriteLine("Introduceti price:");
             double.TryParse(Console.ReadLine(), out double price);
 
@@ -103,9 +113,9 @@ namespace Magazin
             Console.WriteLine("Introduceti cantitate:");
             int.TryParse(Console.ReadLine(), out int cantitate);
 
-            Instrument instrument = new Instrument(nume, brand, price, 0, discount,cantitate);
+            Instrument instrument = new Instrument(nume, brand, price, 0, discount, cantitate);
             return instrument;
-           
+
         }
         public static Client CitireClientTastatura()
         {
@@ -115,7 +125,7 @@ namespace Magazin
             string email = Console.ReadLine();
             Client client = new Client(0, nume, email);
             Console.WriteLine("Introduceti o parola:");
-            string parola=Console.ReadLine();
+            string parola = Console.ReadLine();
             client.SetPassword(parola);
             return client;
 
@@ -132,7 +142,7 @@ namespace Magazin
         public static void AfisareInstrumente(List<Instrument> instrumente)
         {
             Console.WriteLine("Instrumentele sunt:");
-            foreach(Instrument instrument in instrumente)
+            foreach (Instrument instrument in instrumente)
             {
                 AfisareInstrument(instrument);
             }
@@ -145,11 +155,11 @@ namespace Magazin
                 AfisareClient(client);
             }
         }
-        public static string GetPassword(List<Client> clients,string email,string nume)
+        public static string GetPassword(List<Client> clients, string email, string nume)
         {
             foreach (Client client in clients)
             {
-                if(client.Name.ToLower()==nume.ToLower() && client.Email.ToLower() == email.ToLower())
+                if (client.Name.ToLower() == nume.ToLower() && client.Email.ToLower() == email.ToLower())
                 {
                     return client.GetPass();
                 }
@@ -157,7 +167,7 @@ namespace Magazin
             return null;
         }
 
-        
+
     }
 }
 
